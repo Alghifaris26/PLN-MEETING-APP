@@ -208,3 +208,38 @@
     background-color: #00aaff;
     border-radius: 10px;
   }
+
+  /* --- RESPONSIVE CSS --- */
+
+@media (max-width: 768px) {
+    /* Header Adjustments */
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .page-select {
+        width: 100%;
+    }
+    
+    .page-select select {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    /* Dashboard Grid Adjustments */
+    .dashboardGrid {
+        flex-direction: column; /* Menumpuk kolom-kolom secara vertikal */
+    }
+
+    .unit-column {
+        width: 100%; /* Membuat setiap kolom mengambil lebar penuh */
+        flex-shrink: 1; /* Memungkinkan kolom untuk menyusut */
+        gap: 15px; /* Mengurangi jarak antar elemen */
+    }
+
+    .dashboard-card {
+        width: 100%; /* Membuat setiap kartu mengambil lebar penuh */
+    }
+}
