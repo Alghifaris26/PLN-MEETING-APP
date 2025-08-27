@@ -1,0 +1,210 @@
+/* Styling untuk header halaman */
+.page-header {
+    display: flex;
+    margin-bottom: 24px;
+    
+  }
+
+  
+ .title {
+    display: flex; /* Ini kunci untuk membuat elemen berjejer horizontal */
+    align-items: center; /* Ini untuk menyejajarkan mereka secara vertikal di tengah */
+    gap: 10px; /* Ini untuk memberikan sedikit jarak antara ikon dan tulisan */
+}
+
+
+.page-select select{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    border: 5px #00A3E9;
+    border-color:#00A3E9;
+    
+}
+
+ .page-select h3{
+    font-size: 12px;
+    color: #4E4E4E;
+    font-weight: 400;
+ }
+
+  .page-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .breadcrumb {
+    margin: 4px 0 0;
+    color: #888;
+  }
+  
+  .page-header select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .dashboardGrid{
+    flex-direction: row;
+    flex-direction: row;
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+  }
+
+  /* Layout utama untuk grid dashboard */
+  .dashboard-grid {
+    flex-direction: row;
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+
+  }
+  
+  .unit-column {
+    display: flex;
+    flex-direction: column; 
+    gap: 16px;
+    flex-shrink: 0; /* Mencegah kolom menyusut */
+  }
+  
+  .unit-column h3 {
+    margin: 0 0 0 0px;
+    font-weight: 700;
+    color: #868E96;
+    font-size: 19px;
+    line-height: 22px;
+    letter-spacing: 0%;
+  }
+  
+  .office-wrap {
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     margin: 0 0 0 12px;
+     gap: 10px;
+    }
+
+    .office-wrap img {
+        width: 24px;
+        height: 24px;
+    }
+
+  /* Styling untuk setiap kartu */
+  .dashboard-card {
+    width: 250px; /* Lebar kartu bisa disesuaikan */
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+  }
+  
+  .dashboard-card h4 {
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .usage-details .label {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 4px;
+  }
+  
+  .usage-details .percentage-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 12px;
+  }
+  
+  .usage-details .nominal-value {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+  }
+  
+  /* Styling untuk progress bar lingkaran */
+  .progress-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(#00aaff calc(var(--value) * 1%), #e0f7ff 0);
+    transition: background 0.3s;
+  }
+  
+  .progress-circle-inner {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  /* Styling untuk progress bar horizontal */
+  .consumption-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  
+  .bar-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 30px; /* label | progress bar | angka */
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+
+  }
+  
+  .bar-item label {
+    color: #555;
+  }
+  
+  .bar-item span {
+    text-align: right;
+    font-weight: 500;
+  }
+  .progress-item {
+    /* display:flex; */
+    flex-direction:column-reverse;
+    align-items:flex-start;
+    background-color: #007bff;
+  }
+  /* Custom styling untuk elemen progress */
+  progress {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Background progress bar */
+  progress::-webkit-progress-bar {
+    background-color: #e9ecef;
+  }
+  
+  /* Value/fill progress bar */
+  progress::-webkit-progress-value {
+    background-color: #00aaff;
+    border-radius: 10px;
+  }
