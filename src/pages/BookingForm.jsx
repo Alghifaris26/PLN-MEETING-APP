@@ -2,35 +2,28 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { getMasterUnit, getMasterMeetingRooms, getMasterJenisKonsumsi } from '../api';
 
 const BookingForm = () => {
-  // State untuk data dari API
   const [units, setUnits] = useState([]);
   const [allRooms, setAllRooms] = useState([]);
   const [konsumsiList, setKonsumsiList] = useState([]);
 
-  // State untuk mengelola pilihan pengguna di form
   const [selectedUnitId, setSelectedUnitId] = useState('');
   const [selectedRoomId, setSelectedRoomId] = useState('');
   
-  // State untuk data turunan (yang bergantung pada pilihan pengguna)
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [selectedRoomCapacity, setSelectedRoomCapacity] = useState(0);
 
-  // State untuk input form lainnya
   const [tanggalRapat, setTanggalRapat] = useState(new Date().toISOString().split('T')[0]);
   const [waktuMulai, setWaktuMulai] = useState('');
   const [waktuSelesai, setWaktuSelesai] = useState('');
   const [jumlahPeserta, setJumlahPeserta] = useState('');
   
-  // State untuk hasil kalkulasi otomatis
   const [jenisKonsumsi, setJenisKonsumsi] = useState([]);
   const [nominalKonsumsi, setNominalKonsumsi] = useState(0);
 
-  // State untuk loading, error, dan validasi
   const [isLoading, setIsLoading] = useState(true);
   const [fetchError, setFetchError] = useState(null);
   const [errors, setErrors] = useState({});
 
-  // 1. Ambil semua data master saat komponen pertama kali dimuat
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -54,29 +47,25 @@ const BookingForm = () => {
     fetchData();
   }, []);
 
-  // 2. Logika yang berjalan SETIAP KALI PENGGUNA MEMILIH UNIT
   const handleUnitChange = (e) => {
     const unitId = e.target.value;
     setSelectedUnitId(unitId);
 
-    // Reset pilihan ruangan & kapasitas setiap kali ganti unit
     setSelectedRoomId('');
     setFilteredRooms([]);
     setSelectedRoomCapacity(0);
 
-    // Jika unit dipilih, saring daftar ruangan yang sesuai
     if (unitId) {
       const roomsInUnit = allRooms.filter(room => room.officeId === unitId);
       setFilteredRooms(roomsInUnit);
     }
   };
 
-  // 3. Logika yang berjalan SETIAP KALI PENGGUNA MEMILIH RUANG MEETING
   const handleRoomChange = (e) => {
     const roomId = e.target.value;
     setSelectedRoomId(roomId);
     
-    // Cari kapasitas ruangan yang dipilih dan tampilkan
+    
     if (roomId) {
       const room = allRooms.find(r => r.id === roomId);
       setSelectedRoomCapacity(room?.capacity || 0);
@@ -85,7 +74,7 @@ const BookingForm = () => {
     }
   };
   
-  // 4. Logika untuk menghitung konsumsi dan nominal secara otomatis
+  // menghitung konsumsi dan nominal secara otomatis
   const calculateKonsumsiAndNominal = useCallback(() => {
     if (!waktuMulai || !waktuSelesai || !jumlahPeserta || !konsumsiList.length) {
       setJenisKonsumsi([]);
@@ -126,7 +115,6 @@ const BookingForm = () => {
 
   }, [waktuMulai, waktuSelesai, jumlahPeserta, konsumsiList]);
 
-  // Panggil kalkulasi di atas setiap kali input yang relevan berubah
   useEffect(() => {
     calculateKonsumsiAndNominal();
   }, [calculateKonsumsiAndNominal]);
@@ -141,7 +129,6 @@ const BookingForm = () => {
     const peserta = parseInt(jumlahPeserta, 10);
 
     // Aturan 1: Waktu mulai tidak boleh lebih kecil dari tanggal hari ini
-    // kita membandingkan tanggalnya saja
     if (selectedDate < today.setHours(0, 0, 0, 0)) {
         newErrors.tanggalRapat = "Tanggal rapat tidak boleh lebih kecil dari hari ini.";
     }
@@ -168,7 +155,7 @@ const BookingForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Jalankan validasi terakhir sebelum submit
+   
     const newErrors = {};
     const today = new Date();
     const selectedDate = new Date(tanggalRapat);
@@ -176,7 +163,7 @@ const BookingForm = () => {
     const endDateTime = new Date(`${tanggalRapat}T${waktuSelesai}`);
     const peserta = parseInt(jumlahPeserta, 10);
 
-    // Re-check semua aturan validasi
+    
     if (selectedDate < today.setHours(0, 0, 0, 0)) {
         newErrors.tanggalRapat = "Tanggal rapat tidak boleh lebih kecil dari hari ini.";
     }
@@ -196,7 +183,6 @@ const BookingForm = () => {
       return;
     }
 
-    // Jika semua validasi lolos, lanjutkan proses submit
     const newBooking = {
       unitId: selectedUnitId,
       roomId: selectedRoomId,
@@ -211,7 +197,6 @@ const BookingForm = () => {
     try {
       const savedData = await saveBooking(newBooking);
       alert("Pengajuan berhasil disimpan!");
-      // Reset form setelah berhasil
       setSelectedUnitId('');
       setSelectedRoomId('');
       setWaktuMulai('');
@@ -225,7 +210,6 @@ const BookingForm = () => {
     }
   };
 
-  // Tampilan saat loading atau error
   if (isLoading) return <div className="page-content"><h2>Memuat data...</h2></div>;
   if (fetchError) return <div className="page-content"><h2 style={{ color: 'red' }}>Error: {fetchError}</h2></div>;
 

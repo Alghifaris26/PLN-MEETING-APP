@@ -6,38 +6,38 @@ import generation from '../assets/Generation.png'
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [period, setPeriod] = useState('Jan-2024'); // Sesuaikan dengan format period di data API, contoh 'Jan-2024'
+  const [period, setPeriod] = useState('Jan-2024'); 
 
   useEffect(() => {
     getSummaryBookings()
       .then((res) => {
-        // Temukan objek data yang sesuai dengan periode yang dipilih
+       
         const summaryData = res.data.find(item => item.period === period);
-        // Jika data ditemukan, set state data dengan array detailSummary
+        
         if (summaryData) {
-          // Flatten the nested data into a single array of rooms
+          
           const flatData = summaryData.data.flatMap(office =>
             office.detailSummary.map(room => ({
               ...room,
-              officeName: office.officeName // Add office name for grouping
+              officeName: office.officeName 
             }))
           );
           setData(flatData);
         } else {
-          setData([]); // Set data kosong jika periode tidak ditemukan
+          setData([]); 
         }
       })
       .catch((err) => console.error(err, 'gagal mengambil data summaryBookings'));
   }, [period]);
 
   const groupedData = data.reduce((acc, item) => {
-    // Menggunakan officeName untuk pengelompokan
+  
     if (!acc[item.officeName]) acc[item.officeName] = [];
     acc[item.officeName].push(item);
     return acc;
   }, {});
 
-  // Helper function to find consumption data
+  
   const getConsumptionValue = (consumptions, name, key) => {
     const item = consumptions.find(c => c.name === name);
     return item ? parseInt(item[key]) : 0;
