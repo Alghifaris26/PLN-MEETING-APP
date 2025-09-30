@@ -6,7 +6,7 @@ const Header = () => {
     <header className="header">
       <div className="header-left">
         <img style={{width:'38px',height:'52px'}}src={pln} alt="PLN Logo" className="logo" />
-        <span className="app-name">iMeeting</span>
+        <span className="app-name">iMeet</span>
       </div>
       <div className="header-right">
         <a shref="#" className="contact-button">
